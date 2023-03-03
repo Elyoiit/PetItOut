@@ -5,4 +5,6 @@ Base.html-> Harry
 
 Login page(login.html, register.html) -> Harry
 
-Models.py -> Harry
+Models.py(for login parts) -> Harry
+
+Views.py (for login parts) -> Harry
