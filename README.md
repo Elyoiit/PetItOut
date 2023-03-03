@@ -1,6 +1,8 @@
 # PetItOut
 12C projects for WAD2
 
-Base.html->Harry
+Base.html-> Harry
 
-Login page(login.html, register.html) ->Harry
+Login page(login.html, register.html) -> Harry
+
+Model.py -> Harry
