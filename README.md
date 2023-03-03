@@ -8,3 +8,5 @@ Login page(login.html, register.html) -> Harry
 Models.py(for login parts) -> Harry
 
 Views.py (for login parts) -> Harry
+
+Templates (battle page, home user profiles) -> Elliot
