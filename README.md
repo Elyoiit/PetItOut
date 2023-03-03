@@ -5,4 +5,4 @@ Base.html-> Harry
 
 Login page(login.html, register.html) -> Harry
 
-Model.py -> Harry
+Models.py -> Harry
