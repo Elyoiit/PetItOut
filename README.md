@@ -9,4 +9,4 @@ Models.py(for login parts) -> Harry
 
 Views.py (for login parts) -> Harry
 
-Templates (battle page, home user profiles) -> Elliot
+Templates (battle page, home, user profiles) -> Elliot
