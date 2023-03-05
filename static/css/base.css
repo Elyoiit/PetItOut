@@ -1,0 +1,19 @@
+#Login {
+    position:fixed;
+    right:2%;
+}
+
+.search-container{
+    float:top;
+    text-align: center;
+}
+
+
+
+.title {
+    display:block;
+    text-align: left;
+    position:fixed;
+    top:-15px;
+}
+
