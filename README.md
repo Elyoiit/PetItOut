@@ -17,6 +17,7 @@ Templates (battle page, home, user profiles) -> Elliot
 
 General css -> Elloit
 
+
 For django, all css/javascript/images needs to go to 
 static folder reference them in the html files using following format
 
