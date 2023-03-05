@@ -1,6 +1,8 @@
 # PetItOut
 12C projects for WAD2
 
+base.html prototype finished -> Harry
+
 Login page(login.html, register.html) -> Harry
 
 Models.py(for login parts) -> Harry
