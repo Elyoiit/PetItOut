@@ -20,9 +20,7 @@ General css -> Elloit
 
 *For django, all css/javascript/images needs to go to 
 static folder reference them in the html files using following format
-
 \<link rel="stylesheet" href="{% static 'css/base.css' %}">
-
 (useless anyone has other solutions)
 
 setting.py urls.py and PetItOutApp.urls.py ammended for logins - Harry
