@@ -3,29 +3,89 @@
 <html>
     <head>
         <title>Pet It Out!!</title>
+        <style>
+        .battle_shortform {
+            display: grid;
+            grid-template-columns:1fr 3fr 1fr ;
+            border-style: solid;
+            border-width: 2px;
+            border-color: darkgray;
+            background-color: aliceblue;
+
+        }
+
+        .battle_info {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+        }
+
+        .percentage_bar {
+            background-color: aqua;
+        }
+
+        .percentage_texts {
+            display: grid;
+        }
+
+        .percentage_text {
+            display: inline;
+        }
+
+        .pet_name_and_pic {
+            display: grid;
+            grid-template-rows: 50px 1fr;
+            padding-bottom: 20px;
+        }
+
+        .left_name,
+        .right_name{
+            text-align: center;
+        }
+
+        .pet_pic {
+            height: 150px;
+            width:150px;
+            object-fit: cover;
+            border-radius: 65px;
+
+        }
+
+        </style>
     </head>
 
     <body>
-        <h1>Pet It Out (this is where header will go)</h1>
-        <p>
-            Site stuff starts here : <br />
-            <strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</strong><br />
-        </p>
+        <div class = "battle_shortform">
 
-        <aside>
-            <p> 
-                This is to test that sidebar stuff works how can i do this todfngjfggjljkllsdfjsld;gfj
-            <p>  
+            <div class = "pet_name_and_pic">
+                <p class = "left_name">petname2</p>
 
-        </aside>
-</body>
+                <div style = "text-align: center;">
+                    <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
+                </div>
+            </div>      
+            <div class = "battle_info">
+                <div class = "percentage_texts"> 
+                        <p class = percentage_text>left percentage</p>
+                        <p class = percentage_text>right percentage</p>
+                </div>
+                <div class = "percentage_bar">
+                    <p>this is where the percentage bar will go</p>
+                </div>
+                <div>
 
+                </div>
+            </div>      
+            <div class = "pet_name_and_pic">
+                <p class = "right_name">petname2</p>
 
-    <body>
-        <p>
-            Site stuff starts here : <br />
-            <strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</strong><br />
-        </p>
+                <div style="text-align: center;">
+                    <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
+                </div>
+            </div>
+        </div>
+
     </body>
-
 <html>
