@@ -4,40 +4,58 @@
     <head>
         <title>Pet It Out!!</title>
         <style>
+        .sidebar_and_battles{
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+        }
+        
         .battle_shortform {
             display: grid;
             grid-template-columns:1fr 3fr 1fr ;
             border-style: solid;
             border-width: 2px;
             border-color: darkgray;
-            background-color: aliceblue;
+            background-color: #90cdc3;
 
         }
 
         .battle_info {
             display: grid;
             grid-template-rows: 1fr 1fr 1fr 1fr;
-            border-style: solid;
-            border-width: 2px;
-            border-color: red;
+            background-color: #b6d8f2;
+            border-color: #90cdc3;
+            border-right-style: solid;
+            border-left-style: solid;
+            border-width: 3px;
+            border-radius: 50px;
+
         }
 
         .percentage_bar {
             background-color: aqua;
         }
 
-        .percentage_texts {
+        .likes_texts {
             display: grid;
+            margin-left: 5%;
+            margin-right: 5%;
+            grid-template-columns: 1fr 1fr;
         }
 
-        .percentage_text {
-            display: inline;
+        .left_likes_text,
+        .right_likes_text {
+            display: inline-block;
+        }
+
+        .right_likes_text{
+            text-align: right;
         }
 
         .pet_name_and_pic {
             display: grid;
             grid-template-rows: 50px 1fr;
             padding-bottom: 20px;
+            background-color: #90cdc3;
         }
 
         .left_name,
@@ -53,39 +71,54 @@
 
         }
 
+        .button_to_go_to_detailed_battle {
+            width: 50%;
+            height: 90%;
+            background-color: #f4cfdf;
+        }
+
         </style>
     </head>
 
     <body>
-        <div class = "battle_shortform">
 
-            <div class = "pet_name_and_pic">
-                <p class = "left_name">petname2</p>
 
-                <div style = "text-align: center;">
-                    <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
-                </div>
-            </div>      
-            <div class = "battle_info">
-                <div class = "percentage_texts"> 
-                        <p class = percentage_text>left percentage</p>
-                        <p class = percentage_text>right percentage</p>
-                </div>
-                <div class = "percentage_bar">
-                    <p>this is where the percentage bar will go</p>
-                </div>
-                <div>
+        <div class = "sidebar_and_battles">
 
-                </div>
-            </div>      
-            <div class = "pet_name_and_pic">
-                <p class = "right_name">petname2</p>
+            <div class = "sidebar"></div>
 
-                <div style="text-align: center;">
-                    <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
+            <div class = "battle_shortform">
+                <div class = "pet_name_and_pic">
+                    <p class = "left_name">petname1</p>
+
+                    <div style = "text-align: center;">
+                        <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
+                    </div>
+                </div>      
+                <div class = "battle_info">
+                    <div class = "likes_texts"> 
+                            <p class = left_likes_text>left percentage</p>
+                            <p class = right_likes_text>right percentage</p>
+                    </div>
+                    <div class = "percentage_bar">
+                        <p>this is where the percentage bar will go</p>
+                    </div>
+                    <div class = "likes_texts"> 
+                        <p class = left_likes_text>left no. of likes</p>
+                        <p class = right_likes_text>right no. of likes</p>
+                    </div>
+                    <div style = "text-align: center;">
+                        <button class = "button_to_go_to_detailed_battle">See Detailed Battle</button>
+                    </div>
+                </div>      
+                <div class = "pet_name_and_pic">
+                    <p class = "right_name">petname2</p>
+
+                    <div style="text-align: center;">
+                        <img src="../../static/images/dummy_cat.jpeg" class = "pet_pic" alt="Profile pic of cat">
+                    </div>
                 </div>
             </div>
         </div>
-
     </body>
 <html>
