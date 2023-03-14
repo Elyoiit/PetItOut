@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PetItOutApp import views
+
 from django.urls import include
 from django.contrib import admin
 from django.urls import path
-from PetItOutApp import views
+
 from django.conf import settings
 from django.conf.urls.static import static
+from PetItOutApp import views
 
 urlpatterns = [
     path('', views.home_page, name = "home_page"),

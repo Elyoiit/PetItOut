@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+{% extends 'PetItOut/base.html' %}
+{% load static %}
 
-<html>
-    <head>
-        <title>Pet It Out!!</title>
-        <style>
+{% block title_block %}
+Pet It Out!!
+{% endblock %}
+
+{% block body_block %}
+<style>
         .sidebar_and_battles{
             display: grid;
             grid-template-columns: 1fr 7fr;
@@ -119,5 +122,4 @@
                 </div>
             </div>
         </div>
-    </body>
-<html>
+{% endblock %}
