@@ -1,0 +1,89 @@
+.pk-detail-con{position:absolute;right:25%;top:25%;width: 50%;}
+
+.progress{width: 100%;height: 38px;overflow: hidden;background-color: #db1d4e;border-radius: 19px;}
+
+#progress-bar{height: 38px;text-align: left;background-color: #4c3de0;-moz-transition: width .6s ease;-webkit-transition: width .6s ease;transition: width .6s ease;}
+.progress, .progress-bar{background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%);background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%);background-image: linear-gradient(rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%);}
+.lightning{width: 25px;height: 38px;float: right;margin-right: -12px;background: url("img/pk-lightning.png") no-repeat center;background-size: cover;}
+.team-name{position: absolute;top: 0;line-height: 38px;color: #f3eee1;letter-spacing: 1px;font-size: 14px;}
+.vote-nums{line-height: 2;color: black;font-size: 12px;}
+#vnums-l{float: left;margin-left: 23px;}
+#vnums-r{float: right;margin-right: 23px;}
+.vnums-b{position:absolute;top:-60%;left:5%;}
+.vnums-red{position:absolute;top:-60%;right:5%;}
+.sidebar_and_battles{
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+}
+
+.battle_shortform {
+    position:absolute;
+    top:14%;
+    right:1%;
+    width:78%;
+    display: grid;
+    grid-template-columns:1fr 3fr 1fr ;
+    border-style: solid;
+    border-width: 2px;
+    border-color: darkgray;
+    background-color: #90cdc3;
+
+}
+
+.battle_info {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    background-color: #b6d8f2;
+    border-color: #90cdc3;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-width: 3px;
+    border-radius: 50px;
+
+}
+
+.percentage_bar {
+    background-color: aqua;
+}
+
+.likes_texts {
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: 1fr 1fr;
+}
+
+.left_likes_text,
+.right_likes_text {
+    display: inline-block;
+}
+
+.right_likes_text{
+    text-align: right;
+}
+
+.pet_name_and_pic {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    padding-bottom: 20px;
+    background-color: #90cdc3;
+}
+
+.left_name,
+.right_name{
+    text-align: center;
+}
+
+.pet_pic {
+    height: 150px;
+    width:150px;
+    object-fit: cover;
+    border-radius: 65px;
+
+}
+
+.button_to_go_to_detailed_battle {
+    width: 50%;
+    height: 90%;
+    background-color: #f4cfdf;
+}
