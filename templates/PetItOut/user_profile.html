@@ -1,0 +1,108 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <style>
+            .user_details {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                place-items: center;
+            }
+            .user_text_boxes {
+                display: grid;
+                grid-template-rows: auto auto auto;
+            }
+            .name_and_id {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile_picture {
+                height: 200px;
+                width: 200px;
+                border-radius: 75px;
+                object-fit: cover;
+            }
+            .pet_profile {
+                display: grid;
+                grid-template-rows: auto auto auto;
+            }
+            .info_and_edit_button {
+                display: grid;
+                grid-template-columns: 5fr 1fr;
+            }
+            .profile_pic_and_pet_info {
+                display: grid;
+                grid-template-columns: auto 100%;
+                place-items: center;
+            }
+            .pet_profile_pic {
+                height: 150px;
+                width: 150px;
+                border-radius: 65px;
+                object-fit: cover;
+            }
+
+            .pet_information {
+                display: grid;
+                grid-template-rows: auto auto auto;
+            }
+            .pet_info {
+                display: grid;
+                width: 100%;
+                grid-template-rows: auto 1fr;
+            }
+            .pet_stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .edit_button {
+                height: 100%;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class= user_details >
+            <div class = "user_text_boxes">
+                <div class = "name_and_id">
+                    <p class = user_name>
+                        HenryIsMySon42220
+                    </p>
+                    <p>
+                        ID: 234141234
+                    </p>
+                </div>
+                <p class = email>fakeEmail@fake.notreal</p>
+                <p class = bio >Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis debitis, nulla placeat ut recusandae maiores nisi beatae a vel, velit sit quia eos ab! Laudantium quaerat iusto sit eaque, nulla est. Laudantium ipsa sit voluptate beatae officiis harum aut eius dolores? Voluptate voluptates perspiciatis, minus natus quidem dolores adipisci provident voluptatem illum, incidunt ab molestias. Suscipit molestias blanditiis laboriosam consectetur hic quidem quam nobis eum earum non inventore corporis, dolore omnis et at, recusandae quibusdam dolorum. Molestiae fugit aut vero provident et saepe iusto quo delectus asperiores ex, consequatur architecto adipisci voluptates, rerum necessitatibus voluptatibus laudantium harum sit earum temporibus!</p>
+            </div>
+            <img class = "profile_picture" src="../../static/images/dummy_profile.jpeg" alt="the users profile picture">
+        </div>
+        <div class = pet_profile>
+            <div class="name_and_id">
+                <p class=pet_name>Henry</p>
+                <p class = pet_id>ID : 13869854</p>
+            </div>
+            <div class = info_and_edit_button>
+                <div class="pet_information">
+                    <div class = profile_pic_and_pet_info>
+                        <img class = pet_profile_pic src="../../static/images/dummy_cat.jpeg" alt="picture of a pet">
+                        <div class = pet_info>
+                            <div class = pet_stats>
+                                <p>Age:21</p>
+                                <p>Type: cat</p>
+                                <p>sex:m</p>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt explicabo, asperiores tenetur voluptatem quas laborum pariatur, veniam officia repellat quasi ipsa perferendis ex! Suscipit labore explicabo laudantium, culpa, perspiciatis molestias saepe eligendi minus illo adipisci, molestiae quisquam? Magnam eligendi aliquid maxime optio corporis voluptatum eveniet mollitia earum quos id! Suscipit laborum dolorum earum ipsa ut maiores ipsum deserunt possimus? Nulla eius odio quis aperiam minus deleniti? Dolorum illum eligendi nihil. Praesentium quo assumenda tempore blanditiis porro magnam aperiam iure ad hic facere aspernatur natus, et delectus dolore consectetur libero repellendus velit sunt commodi, alias nostrum ea magni animi ex? Ducimus?</p>
+
+                        </div>
+                    </div>
+                    <div class = pet_gallery></div>
+                    <div class = competition_stats></div>
+                </div>
+                <button class = edit_button>edit</button>
+            </div>
+            <div class = pet_challenge></div>
+        </div>
+    </body>
+</html>
