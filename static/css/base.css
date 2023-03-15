@@ -1,20 +1,114 @@
-#Login {
-    position:fixed;
-    right:2%;
-    top:-15px;
-}
+  .nav .search{
+    position:absolute;
+    left:43%;
+    top:0;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    border: none;
+    font-size: 17px;
+  }
+  .nav{
+    clear: both;
+    position: absolute;
+      width:100%;
+      top:0;
+      right:0%;
+      height: 10%;
+      line-height: 50px;
+      background: #0090CE;
+      padding: 0 20px;
+      color: whitesmoke;
+      -moz-box-shadow: 5px 5px 10px #B7B7B7;
+      box-shadow: 5px 5px 10px #B7B7B7;
+      overflow: hidden;
+  }
 
-.search-container{
-    float:top;
+  .Signup{
+    position:absolute;
+    right:7%;
+    top:30%;
+    color: black;
+    height:40%;
+    width: 5%;
+    font-size: auto;
+  }
+  .login{
+    position:absolute;
+    right:1%;
+    top:30%;
+    color: black;
+    height:40%;
+    width: 5%;
+    font-size: auto;
+  }
+
+  
+  .nav .HallOfFame:hover {
+    background-color: #00007B;
+    color: black;
+  }
+  .nav .Archive:hover {
+    background-color: #00007B;
+    color: black;
+  }
+  .nav .HallOfFame{
+    position:absolute;
+    top:0%;
+    left:20%;
+    color: black;
     text-align: center;
-}
-
-
-
-.title {
-    display:block;
-    text-align: left;
+    height:100%;
+    width:6%;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .nav .Archive{
+    position:absolute;
+    top:0%;
+    left:13%;
+    width:5%;
+    color: black;
+    text-align: center;
+    height:100%;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .nav h2{
+    position: absolute;
+    left: 3%;
+    height:10%;
+    width: 15%;
+    top:-10%;
+    font-size:auto;
+    text-decoration: none;
+  }
+  #backTopButton{
     position:fixed;
-    top:-15px;
+    bottom:5px;
+    right:5px;
+    height: 4%;
+    width: 2.5%;
+    background-color:white;
+    display: block;
+    border-radius: 50%;
+  }
+  img{
+    position:absolute;
+    right:3%;
+    top:3%;
+    width:4%;
+    height:6%;
+    border-radius:50%
 }
-
+.logout{
+    position:absolute;
+    right:8%;
+    top:3%;
+    color: black;
+    height:7%;
+    width: 5%;
+    font-size: auto;
+}

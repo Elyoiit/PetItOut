@@ -1,17 +1,17 @@
-{% extends 'PetItOut/base.html' %}
+
 {% load staticfiles %}
 
-{% block title_block %}
-    Register
-{% endblock %}
 
 {% block body_block %}
+<div style="position:absolute;left:43%;top:20%;">
 <h1>Register for PetItOut</h1>
+</div>
 {% if registered %}
     <strong>thank you for registering!</strong> 
 <a href="{% url 'PetItOut:home_page' %}">Return to the homepage.</a><br />
 {% else %}
-<strong>register here!</strong><br />
+<div style="position:absolute;left:35%;top:30%;">
+<strong style="position:absolute;left:32%;">register here!</strong><br />
 <form id="user_form" method="post" action="{% url 'PetItOut:register' %}"
 enctype="multipart/form-data">
 {% csrf_token %}
@@ -19,7 +19,8 @@ enctype="multipart/form-data">
 {{ user_form.as_p }}
 {{ profile_form.as_p }}
 <!-- Provide a button to click to submit the form. -->
-    <input type="submit" name="submit" value="Register" />
+    <input type="submit" name="submit" value="Register" style="position:absolute;left:33%;"/>
 </form>
+</div>
 {% endif %}
 {% endblock %}

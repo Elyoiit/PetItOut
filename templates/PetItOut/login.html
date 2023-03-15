@@ -1,16 +1,21 @@
-{% extends 'PetItOut/base.html' %}
+
 {% load staticfiles %}
-{% block title_block %}
-Login
-{% endblock %}
+
 {% block body_block %}
+<div style="position:absolute;left:43%;top:20%;">
 <h1>Login to PetItOut</h1>
+</div>
+<div style="position:absolute;left:35%;top:30%;">
 <form id="login_form" method="post" action="{% url 'PetItOut:login' %}">
 {% csrf_token %}
 Username: <input type="text" name="username" value="" size="50" />
 <br />
+<br>
 Password: <input type="password" name="password" value="" size="50" />
 <br />
-<input type="submit" value="submit" />
+<br>
+<input type="submit" value="submit" style="position:absolute;left:46%;"/>
 </form>
+</div>
+
 {% endblock %}

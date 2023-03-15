@@ -2,36 +2,40 @@
 {% load static %}
 <!-- CSS CUSTOM -->
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
 <html>
-    <link rel="stylesheet" href="base.css">
-        <head>
-    <title>
-        Pet It Out
-        {% block title_block %}
-        Website Website on the wall, who's the cutest of them all
-        {% endblock %}
-    </title>
-    <div><h2 class = "title">Pet It Out</h2></div>
-    <div id = "Login">
-            {% if user.is_authenticated %}
-            <!-- Show these links when the user is logged in -->
-            <a href="{% url 'PetItOut:logout' %}">Logout</a>
-            {% else %}
-            <!-- Show these links when the user is NOT logged in -->
-            <li><a href="{% url 'PetItOut:register' %}">Sign Up</a></li>
-            <li><a href="{% url 'PetItOut:login' %}">Login</a></li>
-            {% endif %}       
-    </div>
-        
-    <div class="search-container">
-        <form action="/action_page.php">
+    <head>
+<title>
+    Pet It Out
+    {% block title_block %}
+    Website Website on the wall, who's the cutest of them all
+    {% endblock %}
+</title>
+<div class ="nav" style="background-color: rgb(255, 230, 205);color: rgb(205, 214, 255);">
+  <h2><a href="{% url 'PetItOut:home_page' %}" style="text-decoration:none;">Pet It Out</h2>
+  <a class = "Archive" href="{% url 'PetItOut:home_page' %}">Archive</a>
+  <a class="HallOfFame" href="#HallOfFame">Hall of Fame</a>
+    {% if user.is_authenticated %}
+    <a id="img" href="#userprofile">
+    <img src="9e6d437fadc57d86729331ae91655aaa.jpg" alt="Avatar" style="width:4%"></a>
+    <button class = "logout" type = "button"><a href="{% url 'PetItOut:logout' %}">Logout</a></button>
+    {% else %}
+    <form>
+    <button class="Signup" formaction="{% url 'PetItOut:register' %}">Sign Up</button>
+    </form>
+    <form>
+    <button class = "login"formaction="{% url 'PetItOut:login' %}">Login</button>
+    </form>
+    {% endif %}   
+    <form  class="search" action="/action_page.php">
           <input type="text" placeholder="Search.." name="search">
           <button type="submit">Search</button>
-        </form>
-    </div>
-    <br>
-    <hr>
-</head>
+    </form>
+</div>
+
+<footer>
+    <button onclick="topFunction()" id="backTopButton">↑</button>
+</footer>
 <body>
     <div>
         {% block body_block %}
@@ -42,4 +46,5 @@
         {% endblock %}
         </div>
 </body>
+
 </html>
