@@ -27,7 +27,7 @@
     border-width: 2px;
     border-color: darkgray;
     background-color: #90cdc3;
-
+    border-radius: 50px;
 }
 
 .battle_info {
@@ -67,6 +67,7 @@
     grid-template-rows: 50px 1fr;
     padding-bottom: 20px;
     background-color: #90cdc3;
+    border-radius: 50px;
 }
 
 .left_name,

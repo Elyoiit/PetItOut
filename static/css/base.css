@@ -16,7 +16,7 @@
       right:0%;
       height: 10%;
       line-height: 50px;
-      background: #0090CE;
+      background: whitesmoke;
       padding: 0 20px;
       color: whitesmoke;
       -moz-box-shadow: 5px 5px 10px #B7B7B7;
@@ -45,11 +45,11 @@
 
   
   .nav .HallOfFame:hover {
-    background-color: #00007B;
+    background-color: #2d2df5;
     color: black;
   }
   .nav .Archive:hover {
-    background-color: #00007B;
+    background-color: #1e1eeb;
     color: black;
   }
   .nav .HallOfFame{
@@ -95,20 +95,31 @@
     display: block;
     border-radius: 50%;
   }
-  img{
+  .user{
     position:absolute;
-    right:3%;
-    top:3%;
-    width:4%;
-    height:6%;
-    border-radius:50%
-}
-.logout{
-    position:absolute;
-    right:8%;
-    top:3%;
+    right:1%;
+    top:30%;
     color: black;
-    height:7%;
+    height:40%;
     width: 5%;
     font-size: auto;
+}
+#img{
+  position:absolute;
+    right:1%;
+    top:30%;
+    color: black;
+    height:40%;
+    width: 5%;
+    font-size: auto;
+    border-radius: 50%;
+}
+.logout{
+  position:absolute;
+  right:7%;
+  top:30%;
+  color: black;
+  height:40%;
+  width: 5%;
+  font-size: auto;
 }
