@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+{% extends 'PetItOut/base.html' %}
+{% load static %}
 
-<html>
-    <head>
+{% block title_block %}
+Battle Details
+{% endblock %}
 
+{% block body_block %}
         <style>
             .introduction{
                 text-align: center;
@@ -105,5 +108,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+{% endblock %}

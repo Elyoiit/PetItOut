@@ -12,7 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 def home_page(request):
     return render(request, 'PetItOut/home_page.html')
 
-
+def battle_page(request):
+    return render(request, 'PetItOut/detailed_battle.html')
 
 def register(request):
     registered = False
