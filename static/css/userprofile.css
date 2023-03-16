@@ -1,0 +1,58 @@
+.user_details {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    place-items: center;
+}
+.user_text_boxes {
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+.name_and_id {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.profile_picture {
+    height: 200px;
+    width: 200px;
+    border-radius: 75px;
+    object-fit: cover;
+}
+.pet_profile {
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+.info_and_edit_button {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+.profile_pic_and_pet_info {
+    display: grid;
+    grid-template-columns: auto 100%;
+    place-items: center;
+}
+.pet_profile_pic {
+    height: 150px;
+    width: 150px;
+    border-radius: 65px;
+    object-fit: cover;
+}
+
+.pet_information {
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+.pet_info {
+    display: grid;
+    width: 100%;
+    grid-template-rows: auto 1fr;
+}
+.pet_stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.edit_button {
+    height: 100%;
+    background-color: red;
+    border: 20%;
+
+}
