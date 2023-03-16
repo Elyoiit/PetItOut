@@ -25,6 +25,7 @@ class EditProfile(models.Model):
         return self.user_description
 
 class PetProfile(models.Model):
+    user = models.ForeignKey("UserProfile",on_delete=models.CASCADE)
     pet_name = models.TextField(blank=True,null=True)
     pet_type = models.TextField(blank=True,null=True)
     pet_age = models.TextField(blank=True,null=True)

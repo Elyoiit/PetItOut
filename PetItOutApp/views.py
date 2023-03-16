@@ -73,13 +73,16 @@ def some_view(request):
         return HttpResponse("You are logged in.")
     else:
         return HttpResponse("You are not logged in.")
+
+
     
 @login_required
-def user_profile(request):
+def user_profile(request,username):
+    username = request.user.username
     username1 = request.user.username
-    username=UserProfile.objects.all()
+    username2=UserProfile.objects.all()
     pet_profile = PetProfile.objects.all()
-    return render(request,'PetItOut/user_profile.html',context={'username':username,'pet_profile':pet_profile,'name':username1})
+    return render(request,'PetItOut/user_profile.html',context={'username':username2,'pet_profile':pet_profile,'name':username1,'user':username})
     # user_profile_form = UserProfileForm(request.GET)
     # pet_profile_form = PetProfileForm(request.GET)
     # if user_profile_form.is_valid() and pet_profile_form.is_valid():
@@ -105,12 +108,19 @@ def edit_profile(request):
         pet_profile_form = PetProfileForm(request.POST)
 
         if user_profile_form.is_valid() and pet_profile_form.is_valid():
+            pet_profile = pet_profile_form.save(commit=False)
+            pet_profile.user = UserProfile.objects.get(user=request.user)
+            
+            user_profile = user_profile_form.save(commit=False)
+            user_profile.user = UserProfile.objects.get(user=request.user)
             user_profile_form.save()
-            pet_profile_form.save()
+            pet_profile.save()
             if'pet_picture' in request.FILES:
                 pet_profile_form.pet_picture=request.FILES['pet_picture']
                 pet_profile_form.save()
+        
         else:
+            pet_profile.save()
             print(user_profile_form.errors,pet_profile_form.errors)
     else:
         user_profile_form = EditProfileForm()
