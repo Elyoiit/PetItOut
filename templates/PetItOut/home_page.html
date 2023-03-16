@@ -1,91 +1,20 @@
 {% extends 'PetItOut/base.html' %}
 {% load static %}
 
+
 {% block title_block %}
 Pet It Out!!
 {% endblock %}
 
 {% block body_block %}
-<style>
-        .sidebar_and_battles{
-            display: grid;
-            grid-template-columns: 1fr 7fr;
-        }
-        
-        .battle_shortform {
-            display: grid;
-            grid-template-columns:1fr 3fr 1fr ;
-            border-style: solid;
-            border-width: 2px;
-            border-color: darkgray;
-            background-color: #90cdc3;
+<script src="{% static 'javascript/battleBar.js' %}"></script>
 
-        }
+<link rel="stylesheet" href="{% static 'css/home_page.css' %}">
 
-        .battle_info {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr 1fr;
-            background-color: #b6d8f2;
-            border-color: #90cdc3;
-            border-right-style: solid;
-            border-left-style: solid;
-            border-width: 3px;
-            border-radius: 50px;
-
-        }
-
-        .percentage_bar {
-            background-color: aqua;
-        }
-
-        .likes_texts {
-            display: grid;
-            margin-left: 5%;
-            margin-right: 5%;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .left_likes_text,
-        .right_likes_text {
-            display: inline-block;
-        }
-
-        .right_likes_text{
-            text-align: right;
-        }
-
-        .pet_name_and_pic {
-            display: grid;
-            grid-template-rows: 50px 1fr;
-            padding-bottom: 20px;
-            background-color: #90cdc3;
-        }
-
-        .left_name,
-        .right_name{
-            text-align: center;
-        }
-
-        .pet_pic {
-            height: 150px;
-            width:150px;
-            object-fit: cover;
-            border-radius: 65px;
-
-        }
-
-        .button_to_go_to_detailed_battle {
-            width: 50%;
-            height: 90%;
-            background-color: #f4cfdf;
-        }
-
-        </style>
     </head>
 
     <body>
-
-
+        
         <div class = "sidebar_and_battles">
 
             <div class = "sidebar"></div>
@@ -100,16 +29,22 @@ Pet It Out!!
                 </div>      
                 <div class = "battle_info">
                     <div class = "likes_texts"> 
-                            <p class = left_likes_text>left percentage</p>
-                            <p class = right_likes_text>right percentage</p>
+                            
                     </div>
-                    <div class = "percentage_bar">
-                        <p>this is where the percentage bar will go</p>
+                    <div class="pk-detail-con">
+                        <div class="progress" >
+                          <div id="progress-bar" style="width: 50%;">
+                          </div>
+                        </div>
+                        <span id="vnums-l" class="vote-nums">0</span>
+                        <span id="vnums-r" class="vote-nums">0</span>
+                        <button class="vote-nums vnums-b" onclick="moveBlue()">vote me!</button>
+                      <button class="vote-nums vnums-red" onclick="moveRed()">vote me!</button>
                     </div>
-                    <div class = "likes_texts"> 
-                        <p class = left_likes_text>left no. of likes</p>
-                        <p class = right_likes_text>right no. of likes</p>
-                    </div>
+                    <br>
+                    <br>
+                    
+                    <br>
                     <div style = "text-align: center;">
                         <button class = "button_to_go_to_detailed_battle">See Detailed Battle</button>
                     </div>
@@ -123,4 +58,53 @@ Pet It Out!!
                 </div>
             </div>
         </div>
+        
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+
+        var x = null;
+        function moveBlue(){
+        if(x==null){
+          var blueBar = document.getElementsByClassName("progress-bar");
+          
+          var parentWidth = $('.progress-bar').offsetParent().width();
+          var width = $('.progress-bar').width();
+          var i = Math.round(100*width/parentWidth);
+              var write =  parseInt($("#vnums-l").text())+1;
+              var writeString = write.toString();
+                x=1;
+              document.getElementById("vnums-l").innerHTML=writeString;      
+              var oppo = parseInt($("#vnums-r").text());      
+              var result = write/(write+oppo)*100;
+              $("#progress-bar").css("width", result+"%");
+              
+        }
+        else{
+        alert("can only vote once!");
+        }
+        }
+        function moveRed(){
+        if(x==null){
+          var blueBar = document.getElementsByClassName("progress-bar");
+          x=1;
+          var parentWidth = $('.progress-bar').offsetParent().width();
+          var width = $('.progress-bar').width();
+          var i = Math.round(100*width/parentWidth);
+              var write =  parseInt($("#vnums-r").text())+1;
+              var writeString = write.toString();
+           
+              document.getElementById("vnums-r").innerHTML=writeString;      
+              var oppo = parseInt($("#vnums-l").text());      
+              var result = oppo/(write+oppo)*100;
+              $("#progress-bar").css("width", result+"%");
+              
+        }
+        else{
+        alert("can only vote once!");
+        }
+        }
+        </script>
+        
 {% endblock %}

@@ -8,4 +8,6 @@ urlpatterns = [
    path('register/', views.register, name='register'), # New mapping!
    path('login/', views.user_login, name='login'), 
    path('logout/', views.user_logout, name='logout'),
+   path('profile/', views.user_profile, name='user_profile'),
+   path('edit_profile/',views.edit_profile, name = 'edit_profile'),
 ]

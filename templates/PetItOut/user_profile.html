@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+{% extends "PetItOut/base.html" %}
+{% load static %}
+{% block title %}Profile Page{% endblock title %}
+{% block body_block %}
+
+<html>
+    <link rel="stylesheet" href="{% static 'css/userprofile.css' %}">
+    <div class="row my-3 p-3">
+        <h1>This is the profile page for {{user.username}}</h1>
+    </div>
+    <head>
+    </head>
+    <body>
+
+        <div class= user_details >
+            <div class = "user_text_boxes">
+                <div class = "name_and_id">
+                    <br>
+                    <br>
+                    <h2 class = user_name style="position:absolute;left:1%;">
+                        {{name}}
+                        
+                        
+                    </h2>
+                    <p>
+                        ID: 234141234
+                    </p>
+                </div>
+                <p class = email>fakeEmail@fake.notreal</p>
+                <p class = bio >Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis debitis, nulla placeat ut recusandae maiores nisi beatae a vel, velit sit quia eos ab! Laudantium quaerat iusto sit eaque, nulla est. Laudantium ipsa sit voluptate beatae officiis harum aut eius dolores? Voluptate voluptates perspiciatis, minus natus quidem dolores adipisci provident voluptatem illum, incidunt ab molestias. Suscipit molestias blanditiis laboriosam consectetur hic quidem quam nobis eum earum non inventore corporis, dolore omnis et at, recusandae quibusdam dolorum. Molestiae fugit aut vero provident et saepe iusto quo delectus asperiores ex, consequatur architecto adipisci voluptates, rerum necessitatibus voluptatibus laudantium harum sit earum temporibus!</p>
+            </div>
+            <img class = "profile_picture" src="../../static/images/dummy_profile.jpeg" alt="the users profile picture">
+        </div>
+        <div class = pet_profile>
+            <div class="name_and_id">
+                <p class=pet_name>Henry</p>
+                <p class = pet_id>ID : 13869854</p>
+            </div>
+            <div class = info_and_edit_button>
+                <div class="pet_information">
+                    <div class = profile_pic_and_pet_info>
+                        <img class = pet_profile_pic src="../../static/images/dummy_cat.jpeg" alt="picture of a pet">
+                        <div class = pet_info>
+                            <div class = pet_stats>
+                                <p>Age:21</p>
+                                <p>Type: cat</p>
+                                <p>sex:m</p>
+                            </div>
+                           {{pet_name}}
+                        </div>
+                    </div>
+                    <div class = pet_gallery></div>
+                    <div class = competition_stats></div>
+                </div>
+                <a href = "{% url 'PetItOut:edit_profile' %}"><button class = edit_button>edit</button></a>
+            </div>
+            <div class = pet_challenge></div>
+        </div>
+    </body>
+</html>
+{% endblock %}
