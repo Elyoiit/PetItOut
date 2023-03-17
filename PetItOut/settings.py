@@ -29,7 +29,7 @@ SECRET_KEY = 't$*g*m^x9x$di2prhii!pop9g2&x_@m^=pbow5h3=pm1y*4bg5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://elyoiit.pythonanywhere.com/']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', "elyoiit.pythonanywhere.com"]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
