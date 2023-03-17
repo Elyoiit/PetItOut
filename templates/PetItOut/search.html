@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'PetItOut/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -12,7 +12,7 @@
     </div>
 </div>
 <div>
-    <form class="form-inline" id="user-form" method="post" action="{% url 'PetItOutApp:search' %}">
+    <form class="form-inline" id="user-form" method="post" action="{% url 'PetItOut:search' %}">
         {% csrf_token %}
 
         <div class="form-group">
