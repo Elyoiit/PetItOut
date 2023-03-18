@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from PetItOutApp.models import UserProfile, EditProfile, PetProfile
+from PetItOutApp.models import UserProfile,  PetProfile
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 
@@ -18,11 +18,6 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('picture',)
 
-class EditProfileForm(forms.ModelForm):
-    user_description = forms.CharField(max_length=500,required=False,)
-    class Meta:
-        model = EditProfile
-        fields = ('user_description',)
 
 class PetProfileForm(forms.ModelForm):
     pet_name = forms.CharField(max_length=10,required=False,)

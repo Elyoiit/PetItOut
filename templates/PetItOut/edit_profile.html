@@ -11,12 +11,11 @@
 
 <div style="position:absolute;left:35%;top:30%;">
 <strong style="position:absolute;left:32%;">edit here!</strong><br />
-<form id="user_form" method="post" action="{% url 'PetItOut:edit_profile' %}"
+<form id="user_form" method="post" action="{% url 'PetItOut:edit_profile' user.username %}"
 enctype="multipart/form-data">
 {% csrf_token %}
 <!-- Display each form -->
-{{ user_profile_form.as_p }}
-{{ pet_profile_form.as_p }}
+{{ pet_form.as_p }}
 <!-- Provide a button to click to submit the form. -->
     <input type="submit" name="submit" value="edit" style="position:absolute;left:33%;"/>
 </form>

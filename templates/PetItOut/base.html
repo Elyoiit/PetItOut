@@ -1,57 +1,116 @@
 <!DOCTYPE html>
 {% load static %}
-<!-- CSS CUSTOM -->
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-<html>
-    <head>
-<title>
-    Pet It Out
-    {% block title_block %}
-    Website Website on the wall, who's the cutest of them all
-    {% endblock %}
-</title>
-<div class ="nav" >
-  <h2><a href="{% url 'PetItOut:home_page' %}" style="text-decoration:none;">Pet It Out</h2>
-  <a class = "Archive" href="{% url 'PetItOut:home_page' %}">Archive</a>
-  <a class="HallOfFame" href="#HallOfFame">Hall of Fame</a>
-    {% if user.is_authenticated %}
-    <a id="img" href="{% url 'PetItOut:user_profile' user.username %}">
-    <img class="user" src="{% static 'images/rango.jpg' %}" alt="Avatar" style="width:8%;height:120%;border-radius: 80%;top:-10%;"></a>
-    <button class = "logout" type = "button"><a href="{% url 'PetItOut:logout' %}">Logout</a></button>
-    {% else %}
-    <form>
-    <button class="Signup" formaction="{% url 'PetItOut:register' %}">Sign Up</button>
-    </form>
-    <form>
-    <button class = "login"formaction="{% url 'PetItOut:login' %}">Login</button>
-    </form>
-    {% endif %}   
-    <form  class="search" method="post">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit">Search</button>
-    </form>
-</div>
-
-<footer>
-    <button onclick="topFunction()" id="backTopButton">↑</button>
-</footer>
-<body>
-    <div>
-        {% block body_block %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pet It Out
+        {% block title_block %}
+        Website Website on the wall, who's the cutest of them all
         {% endblock %}
-    </div>
-    <div>
-        {% block sidebar_block %}
-        {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <div class="container">
+        
+        
+      </div>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+        <a class="navbar-brand" href="{% url 'PetItOut:home_page' %}">
+          <img src="{% static 'images/dummy_cat.jpeg' %}" width="30" height="30" alt="logo">
+          PetItOut
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="navbar-list-4">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+              
+               
+              </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'PetItOut:user_profile' user.username %}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'PetItOut:logout' %}">Log Out</a></li>
+            </li>   
         </div>
-<script>
-let mybutton = document.getElementById("backTopButton");
+              {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'PetItOut:login' %}" class="btn btn-primary btn-small navbar-btn">login</a>
+                    </li>
+                    <li> ..</li>
+                    <li>
+                        <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" href="{% url 'PetItOut:register' %}">Signup</a>
+                        </div>
+                    </li>
+                </ul>
+              {% endif %}
+        <div class="collapse navbar-collapse" id="navbar-list-4">
+          
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" 
+                    href="#">Profile List</a></li>
+                    <li class="nav-item">
+                    <a class = "nav-link" href="#Archive">Archive</a></li>
+                    <li class="nav-item">
+        <a class="nav-link" href="#HallOfFame">Hall of Fame</a></li>
+                  
 
-function topFunction(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+          <form class="d-flex" role="search" style="position:absolute;right:1%">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          </div>
+        </div>
+      </nav>
+        
+<button
+        type="button"
+        class="btn btn-danger btn-floating btn-lg"
+        id="btn-back-to-top"
+        style="  position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;"
+        >top
+  <i class="fas fa-arrow-up"></i>
+</button>
+<script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"> </script>
+
+<script>
+let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 20 ||
+    document.documentElement.scrollTop > 20
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 </script>
-</body>
+{% block body_block %}
+        {% endblock %}
+
 </html>
