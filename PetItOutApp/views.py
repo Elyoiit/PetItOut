@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -9,17 +10,19 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from PetItOutApp.models import UserProfile,PetProfile,Battle
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from PetItOutApp.bing_search import run_query
 import json
+from django.core.files import File
+
 def home_page(request):
     battle_view = Battle.objects.all
     return render(request, 'PetItOut/home_page.html',context={'battle_views':battle_view})
 
 def battle(request,username):
     username = username
+    print(username)
     context_dict = {}
     battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
 
@@ -73,16 +76,30 @@ def register(request):
 
 @login_required
 def profile_list(request):
-    pet_profiles = PetProfile.objects.all
-    return render(request,'PetItOut/profile_list.html',context={'pet_profiles':pet_profiles})
+    picturefound=False;
+    try:
+        pet_profiles = PetProfile.objects.all
+        picturefound = True
+    except ValueError:
+        messages("There's no pet in the database")
+        redirect(reverse('PetItOut:home_page'))
+    return render(request,'PetItOut/profile_list.html',context={'pet_profiles':pet_profiles,'picturefound':picturefound})
 
 @login_required
 def edit_profile(request,username):
     username = request.user.username
-    pet_profile_user = PetProfile.objects.get(userprofile__user=request.user)
-    pet_form = PetProfileForm(request.POST or None, request.FILES or None, instance=pet_profile_user)
+    try:
+        pet_form = PetProfileForm(request.POST or None, request.FILES or None)
+    except IntegrityError:
+        pet_form = PetProfileForm(request.POST or None, request.FILES or None)
     if pet_form.is_valid():
-        pet_form.save()
+        try:
+            pet_profile_user = PetProfile.objects.get(userprofile__user=request.user)
+            pet_form = PetProfileForm(request.POST or None, request.FILES or None, instance=pet_profile_user)
+            pet_form.save()
+        except IntegrityError:
+            profile = UserProfile.objects.get(user__username=username)
+            PetProfile.objects.create(userprofile=profile,pet_name=pet_form.cleaned_data['pet_name'],pet_type=pet_form.cleaned_data['pet_type'],pet_age=pet_form.cleaned_data['pet_age'],pet_description=pet_form.cleaned_data['pet_description'],pet_picture=pet_form.cleaned_data['pet_picture'])
         redirect(reverse("PetItOut:user_profile" ,args=[username]))
     return render(request, 'PetItOut/edit_profile.html', context = {'pet_form':pet_form, 'username':username,})
         # current_user = User.objects.get(id = request.user.id)
@@ -140,24 +157,24 @@ def user_login(request):
     
 @login_required
 def user_profile(request,username):
-    # try:
     username = username
+    if request.method=='POST':
+        pet_profile_red = PetProfile.objects.get(userprofile__user__username=username)
+        pet_profile_blue = PetProfile.objects.get(userprofile__user__username=request.user.username)
+        Battle.objects.create(petprofileRed=pet_profile_red,petprofileBlue=pet_profile_blue)
+    print(username)
+    print(request.user.username)
     profile = UserProfile.objects.get(user__username=username)
-    pet_profile = PetProfile.objects.get(userprofile__user__username=username)
-    print(pet_profile.pet_picture)
-    # except ObjectDoesNotExist:
-    #     messages("This user have no profile!")
-    #     return redirect(reverse('PetItOut:home_page'))
-    if request.method == "POST":
-    			# Get current user
-            current_user_profile = request.user.profile
-            current_user_profile.save()
-            current_pet_profile = request.user.pet_profile
-            current_pet_profile.save()
-            response = HttpResponse(mimetype="image/jpg")
-            current_pet_profile.save(response,"jpg")
-            
-    return render(request, "PetItOut/user_profile.html", {"profile":profile,'username':username,'pet_profile':pet_profile})
+    profileFound=True;
+    try:
+        pet_profile = PetProfile.objects.get(userprofile__user__username=username)
+        profileFound=True;
+        print(pet_profile.pet_picture)
+    except ObjectDoesNotExist:
+        pet_profile = None
+        profileFound=False;
+        
+    return render(request, "PetItOut/user_profile.html", {"profile":profile,'username':username,'pet_profile':pet_profile,'profileFound':profileFound})
    
 
     

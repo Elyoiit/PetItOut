@@ -9,7 +9,7 @@
     <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{ profile.profile_image.url }}" alt="avatar"
+            <img src="{{ profile.picture.url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
               <h1>{{username}}</h1>
 
@@ -40,8 +40,10 @@
             </div>
           </div>
           <div class="card-body text-center">
+            {% if profileFound %}
             <img src="{{ pet_profile.pet_picture.url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
+              
           </div>
         </div>
       <div class="col-lg-8">
@@ -81,14 +83,22 @@
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{pet_profile.pet_age}}</p>
               </div>
-              
+              {% endif %}
             </div>
             
           </div>
           
         </div>
+
         {% if request.user.id == profile.user.id %}
                 
               <a href="{% url 'PetItOut:edit_profile' user.username %}" class="btn btn-outline-secondary">Edit Profile</a>
+              {% else %}
+              <form id="user_form" method="post" action="{% url 'PetItOut:user_profile' profile.user.username %}"
+enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="submit" name="submit" value="Challenge"/>
+              </form>
               {% endif %}
+              
     {% endblock %}

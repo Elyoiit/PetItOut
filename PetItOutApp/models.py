@@ -1,15 +1,18 @@
+import random
+import string
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
+from django.core.exceptions import FieldDoesNotExist
 
 
 # Create your models here.
 # Create A User Profile Model
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(null=True, blank=True, upload_to="user_profile_images")    
+    picture = models.ImageField(null=True, blank=True, upload_to="user_profile_images")    
     user_description = models.TextField(blank=True,null=True)
 
 
@@ -44,8 +47,18 @@ class PetProfile(models.Model):
         return self.pet_name
     
 class Battle(models.Model):
-    petprofileRed = models.OneToOneField(PetProfile,on_delete=models.CASCADE,related_name="petprofileRed")
-    petprofileBlue = models.OneToOneField(PetProfile,on_delete=models.CASCADE,related_name="petprofileBlue")
+    petprofileRed = models.ForeignKey(PetProfile,related_name="petprofileRed",on_delete=models.CASCADE)
+    petprofileBlue = models.ForeignKey(PetProfile,related_name="petprofileBlue",on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.petprofileRed.userprofile.user.username
+        # try:
+        #     field = self._meta.get_field(self.petprofileRed)
+        #     field2 = self._meta.get_field(self.petprofileBlue)
+        #     def randomword(length):
+        #         letters = string.ascii_lowercase
+        #         return ''.join(random.choice(letters) for i in range(length))
+        #     returnString = self.petprofileRed.userprofile.user.username + randomword(5)
+        # except FieldDoesNotExist:
+            
+        return self.petprofileRed.pet_name+self.petprofileBlue.pet_name
+    

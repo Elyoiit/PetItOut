@@ -4,6 +4,7 @@
 {% block body_block %}
 
 {% if pet_profiles %}
+{% if picturefound %}
     {% for pet_profile in pet_profiles %}
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
@@ -21,5 +22,5 @@
       </div>
       <br/><br/>
       {% endfor %}
-      {% endif %}
+      {% endif %}{% endif %}
 {% endblock %}
