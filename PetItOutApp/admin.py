@@ -1,5 +1,5 @@
 from django.contrib import admin
-from PetItOutApp.models import UserProfile,PetProfile
+from PetItOutApp.models import UserProfile,PetProfile,Battle
 from django.contrib.auth.models import Group, User
 
 # Register your models here.
@@ -22,3 +22,4 @@ admin.site.unregister(User)
 # Reregister User and Profile
 admin.site.register(User, UserAdmin)
 admin.site.register(PetProfile)
+admin.site.register(Battle)

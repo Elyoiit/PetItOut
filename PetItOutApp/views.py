@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
@@ -8,14 +8,30 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from PetItOutApp.models import UserProfile,PetProfile
+from PetItOutApp.models import UserProfile,PetProfile,Battle
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from PetItOutApp.bing_search import run_query
-
+import json
 def home_page(request):
-    return render(request, 'PetItOut/home_page.html')
+    battle_view = Battle.objects.all
+    return render(request, 'PetItOut/home_page.html',context={'battle_views':battle_view})
+
+def battle(request,username):
+    username = username
+    context_dict = {}
+    battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
+
+    context_dict['battle_view'] = battle_view
+    if request.method=="POST":
+        if request.POST.get('operation') =="like_submit" and request.is_ajax():
+            likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
+            likes_view.likes.add(request.user)
+            context_dict['pet_profile']=likes_view
+            return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+    likes_view=PetProfile.objects.all
+    return render(request,'PetItOut/battle.html',context=context_dict)
 
 def search(request):
     result_list = []
@@ -54,6 +70,11 @@ def register(request):
         profile_form = UserProfileForm()
     
     return render(request, 'PetItOut/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
+@login_required
+def profile_list(request):
+    pet_profiles = PetProfile.objects.all
+    return render(request,'PetItOut/profile_list.html',context={'pet_profiles':pet_profiles})
 
 @login_required
 def edit_profile(request,username):
@@ -119,14 +140,14 @@ def user_login(request):
     
 @login_required
 def user_profile(request,username):
-    try:
-        profile = UserProfile.objects.get(user=request.user)
-        username = request.user.username
-        pet_profile = PetProfile.objects.get(userprofile__user=request.user)
-        print(pet_profile.pet_picture)
-    except ObjectDoesNotExist:
-        messages("This user have no profile!")
-        return redirect(reverse('PetItOut:home_page'))
+    # try:
+    username = username
+    profile = UserProfile.objects.get(user__username=username)
+    pet_profile = PetProfile.objects.get(userprofile__user__username=username)
+    print(pet_profile.pet_picture)
+    # except ObjectDoesNotExist:
+    #     messages("This user have no profile!")
+    #     return redirect(reverse('PetItOut:home_page'))
     if request.method == "POST":
     			# Get current user
             current_user_profile = request.user.profile

@@ -35,8 +35,17 @@ class PetProfile(models.Model):
     pet_description = models.TextField(blank=True,null=True)
     pet_picture = models.ImageField(upload_to='pet_images',blank=True,null=True)
     objects = models.Manager()
+    likes = models.ManyToManyField(User,blank=True)
+    @property
+    def total_likes(self):
+        return self.likes.count() 
     
-    # def save(self,*args,**kwargs):
-    #     super(UserProfile, self).save(*args,**kwargs)
     def __str__(self):
         return self.pet_name
+    
+class Battle(models.Model):
+    petprofileRed = models.OneToOneField(PetProfile,on_delete=models.CASCADE,related_name="petprofileRed")
+    petprofileBlue = models.OneToOneField(PetProfile,on_delete=models.CASCADE,related_name="petprofileBlue")
+
+    def __str__(self):
+        return self.petprofileRed.userprofile.user.username
