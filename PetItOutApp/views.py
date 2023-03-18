@@ -97,7 +97,7 @@ def edit_profile(request,username):
             pet_profile_user = PetProfile.objects.get(userprofile__user=request.user)
             pet_form = PetProfileForm(request.POST or None, request.FILES or None, instance=pet_profile_user)
             pet_form.save()
-        except IntegrityError:
+        except:
             profile = UserProfile.objects.get(user__username=username)
             PetProfile.objects.create(userprofile=profile,pet_name=pet_form.cleaned_data['pet_name'],pet_type=pet_form.cleaned_data['pet_type'],pet_age=pet_form.cleaned_data['pet_age'],pet_description=pet_form.cleaned_data['pet_description'],pet_picture=pet_form.cleaned_data['pet_picture'])
         redirect(reverse("PetItOut:user_profile" ,args=[username]))
