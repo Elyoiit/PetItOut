@@ -30,13 +30,9 @@ SECRET_KEY = 't$*g*m^x9x$di2prhii!pop9g2&x_@m^=pbow5h3=pm1y*4bg5'
 DEBUG = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', "elyoiit.pythonanywhere.com"]
-<<<<<<< HEAD
 #Variable defines for media, for now
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-=======
-
->>>>>>> 67729c197ffb486196b33282b8c1d24edc953810
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 

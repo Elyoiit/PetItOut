@@ -15,8 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from PetItOutApp.bing_search import run_query
 
 def home_page(request):
-    pet_profile = PetProfile.objects.get(userprofile__user=request.user)
-    return render(request, 'PetItOut/home_page.html',{'pet_profile':pet_profile})
+    return render(request, 'PetItOut/home_page.html')
 
 def search(request):
     result_list = []
