@@ -8,22 +8,16 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-<<<<<<< HEAD
 from PetItOutApp.models import UserProfile,PetProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from PetItOutApp.bing_search import run_query
-=======
-from PetItOutApp.bing_search import run_query
-from PetItOutApp.models import UserProfile,EditProfile,PetProfile
->>>>>>> 67729c197ffb486196b33282b8c1d24edc953810
 
 def home_page(request):
     pet_profile = PetProfile.objects.get(userprofile__user=request.user)
     return render(request, 'PetItOut/home_page.html',{'pet_profile':pet_profile})
 
-<<<<<<< HEAD
 def search(request):
     result_list = []
     query = ''
@@ -35,10 +29,6 @@ def search(request):
             result_list = run_query(query)
 
     return render(request, 'PetItOut/search.html', {'result_list': result_list, 'query': query})
-=======
-def battle_page(request):
-    return render(request, 'PetItOut/detailed_battle.html')
->>>>>>> 67729c197ffb486196b33282b8c1d24edc953810
 
 def register(request):
     registered = False
