@@ -59,12 +59,13 @@
                     href="{% url 'PetItOut:profile_list' %}">Pet List</a></li>
                   
                     <li class="nav-item">
-        <a class="nav-link" href="#HallOfFame">Hall of Fame</a></li>
+        <a class="nav-link" href="{% url 'PetItOut:hall_of_fame' %}">Hall of Fame</a></li>
                   
 
-        <form  class="search" method="post">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit">Search</button>
+        <form  class="search" method=POST action="{% url 'PetItOut:search' %}">
+          {% csrf_token %}
+          <input type="text" placeholder="Search Pets" name="searched">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
           </div>
         </div>

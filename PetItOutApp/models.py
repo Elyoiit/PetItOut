@@ -36,7 +36,7 @@ class PetProfile(models.Model):
     pet_type = models.TextField(blank=True,null=True)
     pet_age = models.TextField(blank=True,null=True)
     pet_description = models.TextField(blank=True,null=True)
-    pet_picture = models.ImageField(upload_to='pet_images',blank=True,null=True)
+    pet_picture = models.ImageField(upload_to='pet_images',blank=False,null=False)
     objects = models.Manager()
     likes = models.ManyToManyField(User,blank=True)
     @property
