@@ -22,14 +22,20 @@ def home_page(request):
 
 def battle(request,username):
     username = username
-    print(username)
     context_dict = {}
     battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
 
     context_dict['battle_view'] = battle_view
     if request.method=="POST":
-        if request.POST.get('operation') =="like_submit" and request.is_ajax():
+        if request.POST.get('operation') =="like_submit_red" and request.is_ajax():
             likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
+            print(likes_view)
+            likes_view.likes.add(request.user)
+            context_dict['pet_profile']=likes_view
+            return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+        elif request.POST.get('operation') =="like_submit_blue" and request.is_ajax():
+            likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
+            print(likes_view)
             likes_view.likes.add(request.user)
             context_dict['pet_profile']=likes_view
             return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
