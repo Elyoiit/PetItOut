@@ -1,0 +1,30 @@
+{% extends 'PetItOut/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    <center>
+        {% if searched %}
+        <h1>You Searched for {{ searched }}</h1>
+        <br>
+        {% for pet_profile in pet_profiles %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ pet_profile.pet_picture.url }}" class="img-fluid rounded-start" alt="Profile Image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{pet_profile.pet_name}}</h5>
+                  <p class="card-text"><a href="{% url 'PetItOut:user_profile' pet_profile.userprofile.user.username %}">@{{ pet_profile.pet_name }}</a></p>
+                  <br/><br/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br/><br/>
+            {% endfor %}
+        {% else %}
+        <h1>Huh? What did you say?</h1>
+        {% endif %}
+        </center>
+{% endblock %}

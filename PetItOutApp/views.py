@@ -12,42 +12,66 @@ from django.contrib.auth import authenticate, login, logout
 from PetItOutApp.models import UserProfile,PetProfile,Battle
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from PetItOutApp.bing_search import run_query
 import json
-from django.core.files import File
+from django.db.models import Count
 
+# this is the home page, which should include a list of battles, see template
 def home_page(request):
     battle_view = Battle.objects.all
     return render(request, 'PetItOut/home_page.html',context={'battle_views':battle_view})
-
+# this is the battle page, which can be redirected from home_page, includes pet information in the page
 def battle(request,username):
     username = username
-    print(username)
     context_dict = {}
-    battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
+    i = 1;
+    try:
+        battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
+    except:
+        try:
+            battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)[0]
+        except:
+            battle_view = Battle.objects.filter(petprofileRed__userprofile__user__username=username)[i]
+            i+=1;
 
     context_dict['battle_view'] = battle_view
+    # when user try to vote for the pet competitions
     if request.method=="POST":
-        if request.POST.get('operation') =="like_submit" and request.is_ajax():
-            likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
-            likes_view.likes.add(request.user)
-            context_dict['pet_profile']=likes_view
-            return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+        # user must login to vote
+        if request.user.is_authenticated:
+            if request.POST.get('operation') =="like_submit_red" and request.is_ajax():
+                likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
+                print(likes_view)
+                likes_view.likes.add(request.user)
+                context_dict['pet_profile']=likes_view
+                return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+            elif request.POST.get('operation') =="like_submit_blue" and request.is_ajax():
+                likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
+                print(likes_view)
+                likes_view.likes.add(request.user)
+                context_dict['pet_profile']=likes_view
+                return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+        else:
+            return render(request,'PetItOut/battle.html',context=context_dict)
     likes_view=PetProfile.objects.all
     return render(request,'PetItOut/battle.html',context=context_dict)
 
+# this map a list of 10 pets in order of the number of likes they receive
+def hallOfFame(request):
+    pet_profiles = PetProfile.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')[:10]
+    print(pet_profiles)
+    return render(request,'PetItOut/hall_of_fame.html',context={'pet_profiles':pet_profiles})
+
+# search within databse of pets, pass back pet_profile, receive search input from template
 def search(request):
-    result_list = []
-    query = ''
-
     if request.method == 'POST':
-        query = request.POST['query'].strip()
+        searched = request.POST['searched']
+        pet_profiles = PetProfile.objects.filter(pet_name__contains=searched)
+        print(pet_profiles)
+        return render(request, 'PetItOut/search_result.html', context={'searched':searched,'pet_profiles':pet_profiles})
+    else:
+        return render(request, 'PetItOut/search_result.html', {})
 
-        if query:
-            result_list = run_query(query)
-
-    return render(request, 'PetItOut/search.html', {'result_list': result_list, 'query': query})
-
+# a standard register field
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -74,6 +98,7 @@ def register(request):
     
     return render(request, 'PetItOut/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
+# this pass to templates a list of pets, if the database is empty, this would return back to home_page
 @login_required
 def profile_list(request):
     picturefound=False;
@@ -85,68 +110,38 @@ def profile_list(request):
         redirect(reverse('PetItOut:home_page'))
     return render(request,'PetItOut/profile_list.html',context={'pet_profiles':pet_profiles,'picturefound':picturefound})
 
+# 
 @login_required
 def edit_profile(request,username):
     username = request.user.username
-    try:
-        pet_form = PetProfileForm(request.POST or None, request.FILES or None)
-    except IntegrityError:
-        pet_form = PetProfileForm(request.POST or None, request.FILES or None)
+    pet_form = PetProfileForm(request.POST or None, request.FILES or None)
+    # just like register, user post a form back to databse, with pet_type, name and so on, refer back to form
     if pet_form.is_valid():
         try:
             pet_profile_user = PetProfile.objects.get(userprofile__user=request.user)
             pet_form = PetProfileForm(request.POST or None, request.FILES or None, instance=pet_profile_user)
             pet_form.save()
         except:
+            # if the users do not have petprofiles link to them, then petprofiles would be created instead of amending to existing ones
             profile = UserProfile.objects.get(user__username=username)
             PetProfile.objects.create(userprofile=profile,pet_name=pet_form.cleaned_data['pet_name'],pet_type=pet_form.cleaned_data['pet_type'],pet_age=pet_form.cleaned_data['pet_age'],pet_description=pet_form.cleaned_data['pet_description'],pet_picture=pet_form.cleaned_data['pet_picture'])
         redirect(reverse("PetItOut:user_profile" ,args=[username]))
     return render(request, 'PetItOut/edit_profile.html', context = {'pet_form':pet_form, 'username':username,})
-        # current_user = User.objects.get(id = request.user.id)
-        # profile_user = UserProfile.objects.get(user_id=request.user.id)
-        # username = request.user.username
         
-        # user_profile_form = EditProfileForm(request.POST,instance=current_user)
-        # pet_profile_form = PetProfileForm(request.POST,instance=profile_user)
-
-        # if user_profile_form.is_valid() and pet_profile_form.is_valid():
-        #     user_profile_form.save()
-        #     pet_profile_form.save()
-
-        #     login(request,current_user)
-        #     return redirect(reverse("PetItOut:user_profile" ,args=[username]))
-        
-        # else:
-        #     print(user_profile_form.errors,pet_profile_form.errors)
-    
-        # user_profile_form = EditProfileForm()
-        # pet_profile_form = PetProfileForm()
-        # return render(request, 'PetItOut/edit_profile.html',context = {'user_profile_form':user_profile_form,'pet_profile_form':pet_profile_form,})
 
 def user_login(request):
-    # If the request is a HTTP POST, try to pull out the relevant information.
+    # Standard login interface, Profile image, username, password and email required
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
-# Use Django's machinery to attempt to see if the username/password
-# combination is valid - a User object is returned if it is.
         user = authenticate(username=username, password=password)
-# If we have a User object, the details are correct.
-# If None (Python's way of representing the absence of a value), no user
-# with matching credentials was found.
         if user:
-# Is the account active? It could have been disabled.
             if user.is_active:
-# If the account is valid and active, we can log the user in.
-# We'll send the user back to the homepage.
                 login(request, user)
                 return redirect(reverse('PetItOut:home_page'))
             else:
-# An inactive account was used - no logging in!
                 return HttpResponse("Your PetItOut account is disabled.")
         else:
-# Bad login details were provided. So we can't log the user in.
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
@@ -156,12 +151,19 @@ def user_login(request):
 
     
 @login_required
+# Two part in this page, first part is request.user, which is the current logged user's userprofile,
+# second part is the user other than the logged user
+# Either way, a username would be return and mapped to the url
 def user_profile(request,username):
     username = username
     if request.method=='POST':
-        pet_profile_red = PetProfile.objects.get(userprofile__user__username=username)
-        pet_profile_blue = PetProfile.objects.get(userprofile__user__username=request.user.username)
-        Battle.objects.create(petprofileRed=pet_profile_red,petprofileBlue=pet_profile_blue)
+        try:
+            pet_profile_red = PetProfile.objects.get(userprofile__user__username=username)
+            pet_profile_blue = PetProfile.objects.get(userprofile__user__username=request.user.username)
+            Battle.objects.create(petprofileRed=pet_profile_red,petprofileBlue=pet_profile_blue)
+# if the user does not have a petprofile link to them, then they can't challenge other users' pet
+        except:
+            messages.error(request,"You don't have a pet, or you already started a battle with it")
     print(username)
     print(request.user.username)
     profile = UserProfile.objects.get(user__username=username)
@@ -170,9 +172,10 @@ def user_profile(request,username):
         pet_profile = PetProfile.objects.get(userprofile__user__username=username)
         profileFound=True;
         print(pet_profile.pet_picture)
-    except ObjectDoesNotExist:
+    except:
         pet_profile = None
         profileFound=False;
+
         
     return render(request, "PetItOut/user_profile.html", {"profile":profile,'username':username,'pet_profile':pet_profile,'profileFound':profileFound})
    
@@ -185,15 +188,3 @@ def user_logout(request):
     logout(request)
 # Take the user back to the homepage.
     return redirect(reverse('PetItOut:home_page'))
-
-def search(request):
-    result_list = []
-    query = ''
-
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-
-        if query:
-            result_list = run_query(query)
-    
-    return render(request, 'PetItOut/search.html', {'result_list': result_list, 'query': query})
