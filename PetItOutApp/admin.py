@@ -3,6 +3,7 @@ from PetItOutApp.models import UserProfile,PetProfile,Battle
 from django.contrib.auth.models import Group, User
 
 # Register your models here.
+# Standard django admin has a group in it, which the databse don't need, hence unregistered
 admin.site.unregister(Group)
 
 # Mix Profile info into User info

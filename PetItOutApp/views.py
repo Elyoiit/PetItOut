@@ -25,15 +25,16 @@ def battle(request,username):
     context_dict = {}
     i = 1;
     try:
-        battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)
+        battle_view = Battle.objects.get(battleName=username)
+        context_dict['battle_view'] = battle_view
     except:
         try:
             battle_view = Battle.objects.get(petprofileRed__userprofile__user__username=username)[0]
+            context_dict['battle_view'] = battle_view
         except:
-            battle_view = Battle.objects.filter(petprofileRed__userprofile__user__username=username)[i]
-            i+=1;
+            pass
 
-    context_dict['battle_view'] = battle_view
+    
     # when user try to vote for the pet competitions
     if request.method=="POST":
         # user must login to vote
@@ -43,13 +44,13 @@ def battle(request,username):
                 print(likes_view)
                 likes_view.likes.add(request.user)
                 context_dict['pet_profile']=likes_view
-                return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+                return HttpResponse(json.dumps(context_dict),content__type='application/json')
             elif request.POST.get('operation') =="like_submit_blue" and request.is_ajax():
                 likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
                 print(likes_view)
                 likes_view.likes.add(request.user)
                 context_dict['pet_profile']=likes_view
-                return HttpResponse(json.dumps(context_dict),likes_view__type='application/json')
+                return HttpResponse(json.dumps(context_dict),content__type='application/json')
         else:
             return render(request,'PetItOut/battle.html',context=context_dict)
     likes_view=PetProfile.objects.all
@@ -87,8 +88,8 @@ def register(request):
             profile.user = user
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
+                profile.save()
+                registered = True
             # redirect(reverse('PetItOut:home_page'))
         else:
             print(user_form.errors, profile_form.errors)
@@ -160,7 +161,8 @@ def user_profile(request,username):
         try:
             pet_profile_red = PetProfile.objects.get(userprofile__user__username=username)
             pet_profile_blue = PetProfile.objects.get(userprofile__user__username=request.user.username)
-            Battle.objects.create(petprofileRed=pet_profile_red,petprofileBlue=pet_profile_blue)
+            battleName=username+request.user.username
+            Battle.objects.create(petprofileRed=pet_profile_red,petprofileBlue=pet_profile_blue,battleName=battleName)
 # if the user does not have a petprofile link to them, then they can't challenge other users' pet
         except:
             messages.error(request,"You don't have a pet, or you already started a battle with it")

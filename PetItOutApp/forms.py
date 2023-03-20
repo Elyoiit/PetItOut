@@ -11,14 +11,14 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password',)
-
+# Standard user profile model, this one get user picture
 class UserProfileForm(forms.ModelForm):
     picture = forms.ImageField(required=False,)
     class Meta:
         model = UserProfile
         fields = ('picture',)
 
-
+# For user to edit or create pet profile, map to model PetProfile
 class PetProfileForm(forms.ModelForm):
     pet_name = forms.CharField(max_length=10,required=False,)
     pet_type = forms.CharField(max_length=500,required=False,)

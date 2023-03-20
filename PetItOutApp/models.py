@@ -11,7 +11,7 @@ from django.core.exceptions import FieldDoesNotExist
 # Create your models here.
 # Create A User Profile Model
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(null=True, blank=True, upload_to="user_profile_images")    
     user_description = models.TextField(blank=True,null=True)
 
@@ -42,6 +42,7 @@ class PetProfile(models.Model):
 class Battle(models.Model):
     petprofileRed = models.ForeignKey(PetProfile,related_name="petprofileRed",on_delete=models.CASCADE)
     petprofileBlue = models.ForeignKey(PetProfile,related_name="petprofileBlue",on_delete=models.CASCADE)
+    battleName = models.TextField(blank=False,primary_key=True)
 
     def __str__(self):
         return self.petprofileRed.pet_name+self.petprofileBlue.pet_name

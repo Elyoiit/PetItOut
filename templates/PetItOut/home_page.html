@@ -19,7 +19,7 @@ Pet It Out!!
             <div class="card-body">
               <h5 class="card-title">{{battle_view.petprofileRed.userprofile.user.username}}</h5>
               <p class="card-text">battle with {{battle_view.petprofileBlue.userprofile.user.username}}</p>
-              <p class="card-text"><a href="{% url 'PetItOut:battle' battle_view.petprofileRed.userprofile.user.username %}">see battle</a></p>
+              <p class="card-text"><a href="{% url 'PetItOut:battle' battle_view.battleName %}">see battle</a></p>
               <br/><br/>
             </div>
           </div>
