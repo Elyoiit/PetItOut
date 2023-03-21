@@ -4,33 +4,114 @@ import django
 django.setup()
 from PetItOutApp.models import UserProfile, PetProfile, Battle
 from django.contrib.auth.models import User
-
+import tempfile
 
 def populate():
     users = [
-        {'username' :'henryIsMySon',
+        {'username' :'HenryIsMySon',
         'email' : 'henryIsMySon266@gmail.com',
-        'password' : 'thisIsHenrysWorld'}]
+        'password' : 'thisIsHenrysWorld'},
+
+        {'username' :'Hannah_Lane',
+        'email' : 'HannahLane1997@live.co.uk',
+        'password' : '1231997'},
     
-    user_profiles = [{'username' : 'henryIsMySon',
-              'picture': None,
-              'userdescription': "Hey everyone!! Im a cat lover with a cat son, and my sons name is henry. There's never been a cat like Henry before and Im here to prove it."}
+        {'username' :'CoffeeBeanGhost',
+        'email' : 'BethSimpson@gmail.com',
+        'password' : 'GoingGhost'},
+
+        {'username' :'RatPack1562',
+        'email' : 'ratfactsbuisiness@yahoo.com',
+        'password' : 'MyD0g1sS1ck'}]
+    
+    user_profiles = [{
+            'username' : 'HenryIsMySon',
+            'picture': tempfile.NamedTemporaryFile(suffix=".jpg").henry_is_my_son,
+            'user_description': "Hey everyone!! Im a cat lover with a cat son, and my sons name is henry. There's never been a cat like Henry before and Im here to prove it."},
+
+            {'username' : 'Hannah_Lane',
+            'picture': tempfile.NamedTemporaryFile(suffix=".jpg").this_is_henry,
+            'user_description': "My name's Hannah lane. I have a love of all things animal and want to see whats going on! I always love to talk to so send me a message if you feel like chatting :)" },
+
+            {'username' : 'CoffeeBeanGhost',
+            'picture': tempfile.NamedTemporaryFile(suffix=".jpg").CoffeeBeanGhost,
+            'user_description': "I'm mostly here to show off my reptiles. A lot of people are not fans of lizards, but I want to show people that they are cute and way way way sweeter than people think. If you are a fan and want to see more pics of them, then you can find me at 'CoffeeBeanGhost' on instagram"}, 
+            
+            {'username' : 'RatPack1562',
+            'picture': tempfile.NamedTemporaryFile(suffix=".jpg").fractal_profile_pic,
+            'user_description': "hi. you might know me from twitter as @ratFacts (and if you dont you should totally follow me) (and if you do know me but arent following me you should also follow me) (if you are following me then yay!). that was too many brackets. like my pets!"},
     ]
-    pet_profiles = [{
-        'userprofile': 'henryIsMySon',
+
+    pet_profiles = [
+        {'userprofile': 'HenryIsMySon',
         'pet_name': 'Henry',
         'pet_type': 'Cat',
         'pet_age': '2 years',
-        'pet_description': 'lorem50',
-        'pet_picture': None,
-    }]
+        'pet_description': 'Henry is the sweetest, bestest cat you will ever see in your life and Im here to prove it. Seriously, If you dont vote for this little fella then I dont know whats wrong with you. But its something. Something you should go to a doctors about.',
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").this_is_henry},
 
-    battles = [{        
-        'userprofileRed' : 'henryIsMySon',
-        'petprofileRed' : 'Henry',
-        'userProfileBlue' : '',
-        'petProfileBlue' : ''
-    }
+        {'userprofile': 'Hannah_Lane',
+        'pet_name': 'Ally',
+        'pet_type': 'Cat',
+        'pet_age': '1 years',
+        'pet_description': "Ally is a little standoffish at times, but she means well. She spends most of her time trying to climb on top of doorframes and I spend most of my time trying to get her down",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").ally},
+
+        {'userprofile': 'Hannah_Lane',
+        'pet_name': 'Cierra',
+        'pet_type': 'Dog',
+        'pet_age': '7 years',
+        'pet_description': "Cierra's best friend is Ally. She's a lot calmer and a LOT more cuddly.",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").ally},
+
+        {'userprofile': 'CoffeeBeanGhost',
+        'pet_name': 'Tony',
+        'pet_type': 'Snake',
+        'pet_age': '1.2 years',
+        'pet_description': "If you're a little skittish around snakes then I don't blame you. Media's made them out to be these cold-blooded, heartless creatures. They are cold-blooded and love lounging, but If anyone's told you they're heartless and don't have emotions, that person hasn't owned them",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").snake},
+
+        {'userprofile': 'CoffeeBeanGhost',
+        'pet_name': 'Brandon',
+        'pet_type': 'Tortoise',
+        'pet_age': '12 years',
+        'pet_description': "Please say a little 'hi' to definitely the oldest pet I have. Brandon is a sweet old man who just wants to eat lettice and relax. We could all be a bit more chill in life and Brandon reminds us of that",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").tortoise},
+
+        {'userprofile': 'CoffeeBeanGhost',
+        'pet_name': 'Shelley',
+        'pet_type': 'Iguana',
+        'pet_age': '3 years',
+        'pet_description': "Shelley is my iguana. She's definitely a bit spoiled, but she's pretty enough to deserve it. I remember going to the reptile house whenever my parent's would take me to the zoo. I always wanted an iguana the most, so Shelley was the first reptile I ever got. We've been through thick and thin together and she's always going to have a special place in my heart",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").Iguana},
+
+        {'userprofile': 'RatPack1562',
+        'pet_name': 'Mayo',
+        'pet_type': 'Rat',
+        'pet_age': '1.2 years',
+        'pet_description': "look at this little gentleman. this little guy. how can you not love him. rats are smart but mayo is really really smart. he leanrs to do tricks so quickly its not even funny and he loves to do puzzles to get his food.",
+        'pet_picture': tempfile.NamedTemporaryFile(suffix=".jpg").mouse},
+
+    ]
+
+    battles = [
+        {'pet_name_red' : 'Henry',
+        'pet_name_blue' : 'Ally'},
+
+        {'pet_name_red' : 'Mayo',
+        'pet_name_blue' : 'Shelley'},
+
+        {'pet_name_red' : 'Brandon',
+        'pet_name_blue' : 'Cierra'},
+
+        {'pet_name_red' : 'Ally',
+        'pet_name_blue' : 'Tony'},
+
+        {'pet_name_red' : 'Cierra',
+        'pet_name_blue' : 'Henry'},
+
+        {'pet_name_red' : 'Tony',
+        'pet_name_blue' : 'Brandon'},
     ]
 
     for user_data in users:
@@ -41,29 +122,51 @@ def populate():
         )
         for user_profile in user_profiles:
             if user_profile['username'] == user.username:
-                user_profile_to_add = user_profile
-        user_profile_added = add_userprofile(user, user_profile_to_add)
+                user_profile_added = add_userprofile(user, user_profile)
+                user_profile['object'] = user_profile_added
+                username_of_added_account = user_profile['username']
 
-        pet_profiles_to_add = [pet_profile for pet_profile in pet_profiles
-                                if pet_profiles['userprofile'] == user_profile_to_add['userprofile']]
+        for pet_profile in pet_profiles:
+            if pet_profile['userprofile'] == username_of_added_account:
+                pet_profile['object'] = add_pets(user, user_profile_added, pet_profile)
+
+    for battle in battles:
+        red_pet = None
+        blue_pet = None
+
+        for pet_profile in pet_profiles:
+            if pet_profile['pet_name'] == battle['pet_name_red']:
+                red_pet = pet_profile['object']
+            elif pet_profile['pet_name'] == battle['pet_name_blue']:
+                blue_pet = pet_profile['object']
         
-        for pet_profile in pet_profiles_to_add:
-            add_pets(user, user_profile_added, pet_profile)
+        Battle.objects.create(petprofileRed = red_pet,
+                            petprofileBlue = blue_pet,
+                            battleName = red_pet.pet_name + blue_pet.pet_name)
+
 
 def add_pets(user, userprofile, pet_profile):
-    pet = PetProfile.objects.get_or_create(userprofile = userprofile)[0]
-    pet.pet_name = pet_profile['pet_name']
-    pet.pet_type = pet_profile['pet_type']
-    pet.pet_age = pet_profile['pet_age']
-    pet.pet_description = pet_profile['pet_description']
-    return pet
+    petprofile = PetProfile.objects.get_or_create(userprofile=userprofile,
+                                                   pet_name=pet_profile['pet_name'],
+                                                   pet_type=pet_profile['pet_type'],
+                                                   pet_age=pet_profile['pet_age'],
+                                                   pet_description=pet_profile['pet_description'])[0]
+    return petprofile
 
 def add_userprofile(user, user_profile):
     profile = UserProfile.objects.get_or_create(user = user)[0]
     profile.picture = None
     profile.user_description = user_profile['user_description']
+    profile.save()
     return profile
 
 if __name__ == '__main__':
+    for user in User.objects.all():
+        if user.username != 'ellio':
+            user.delete()
     populate()
+    for user in User.objects.all():
+        if user.username != 'ellio':
+            user.delete()
+
 
