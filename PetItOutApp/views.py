@@ -13,6 +13,7 @@ from PetItOutApp.models import UserProfile,PetProfile,Battle
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 import json
+from django.shortcuts import HttpResponse
 from django.db.models import Count
 
 # this is the home page, which should include a list of battles, see template
@@ -34,18 +35,18 @@ def battle(request,username):
         except:
             pass
 
-    
+
     # when user try to vote for the pet competitions
     if request.method=="POST":
         # user must login to vote
         if request.user.is_authenticated:
-            if request.POST.get('operation') =="like_submit_red" and request.is_ajax():
+            if request.POST.get('operation') =="like_submit_red" and is_ajax(request):
                 likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
                 print(likes_view)
                 likes_view.likes.add(request.user)
                 context_dict['pet_profile']=likes_view
                 return HttpResponse(json.dumps(context_dict),content__type='application/json')
-            elif request.POST.get('operation') =="like_submit_blue" and request.is_ajax():
+            elif request.POST.get('operation') =="like_submit_blue" and is_ajax(request):
                 likes_view = get_object_or_404(PetProfile,userprofile__user__username=username)
                 print(likes_view)
                 likes_view.likes.add(request.user)
@@ -96,8 +97,11 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
+
     return render(request, 'PetItOut/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 # this pass to templates a list of pets, if the database is empty, this would return back to home_page
 @login_required
@@ -111,7 +115,7 @@ def profile_list(request):
         redirect(reverse('PetItOut:home_page'))
     return render(request,'PetItOut/profile_list.html',context={'pet_profiles':pet_profiles,'picturefound':picturefound})
 
-# 
+#
 @login_required
 def edit_profile(request,username):
     username = request.user.username
@@ -128,7 +132,7 @@ def edit_profile(request,username):
             PetProfile.objects.create(userprofile=profile,pet_name=pet_form.cleaned_data['pet_name'],pet_type=pet_form.cleaned_data['pet_type'],pet_age=pet_form.cleaned_data['pet_age'],pet_description=pet_form.cleaned_data['pet_description'],pet_picture=pet_form.cleaned_data['pet_picture'])
         redirect(reverse("PetItOut:user_profile" ,args=[username]))
     return render(request, 'PetItOut/edit_profile.html', context = {'pet_form':pet_form, 'username':username,})
-        
+
 
 def user_login(request):
     # Standard login interface, Profile image, username, password and email required
@@ -150,7 +154,7 @@ def user_login(request):
 
 
 
-    
+
 @login_required
 # Two part in this page, first part is request.user, which is the current logged user's userprofile,
 # second part is the user other than the logged user
@@ -169,20 +173,20 @@ def user_profile(request,username):
     print(username)
     print(request.user.username)
     profile = UserProfile.objects.get(user__username=username)
-    profileFound=True;
+    profileFound=True
     try:
         pet_profile = PetProfile.objects.get(userprofile__user__username=username)
-        profileFound=True;
+        profileFound=True
         print(pet_profile.pet_picture)
     except:
         pet_profile = None
-        profileFound=False;
+        profileFound=False
 
-        
+
     return render(request, "PetItOut/user_profile.html", {"profile":profile,'username':username,'pet_profile':pet_profile,'profileFound':profileFound})
-   
 
-    
+
+
 
 @login_required
 def user_logout(request):
