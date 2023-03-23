@@ -93,14 +93,14 @@ def populate():
         'pet_type': 'Dog',
         'pet_age': '7 years',
         'pet_description': "Cierra's best friend is Ally. She's a lot calmer and a LOT more cuddly.",
-        'pet_picture': os.path.join(POPULATION_PICTURES_DIR, "Cierra")},
+        'pet_picture': os.path.join(POPULATION_PICTURES_DIR, "Cierra.jpg")},
 
         {'userprofile': 'CoffeeBeanGhost',
         'pet_name': 'Tony',
         'pet_type': 'Snake',
         'pet_age': '1.2 years',
         'pet_description': "If you're a little skittish around snakes then I don't blame you. Media's made them out to be these cold-blooded, heartless creatures. They are cold-blooded and love lounging, but If anyone's told you they're heartless and don't have emotions, that person hasn't owned them",
-        'pet_picture': os.path.join(POPULATION_PICTURES_DIR, "snake")},
+        'pet_picture': os.path.join(POPULATION_PICTURES_DIR, "snake.jpg")},
 
         {'userprofile': 'A_Streetpet_named_Desire',
         'pet_name': 'Brandon',
