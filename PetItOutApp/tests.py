@@ -156,7 +156,7 @@ class FormTest(TestCase):
         for expected_field_name in expected_fields:
             self.assertTrue(expected_field_name in fields.keys())
     
-class Chapter9RegistrationTests(TestCase):
+class RegistrationTests(TestCase):
 
     def test_new_registration_view_exists(self):
         url = ''
@@ -191,7 +191,7 @@ class Chapter9RegistrationTests(TestCase):
 
 
 
-class Chapter9LoginTests(TestCase):
+class LoginTests(TestCase):
     def test_login_url_exists(self):
         url = ''
 
