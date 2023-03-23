@@ -199,8 +199,5 @@ def add_userprofile(user, user_profile):
     return profile
 
 if __name__ == '__main__':
-    for i in User.objects.all():
-        if i.username != "ellio":
-            i.delete()
     populate()
 

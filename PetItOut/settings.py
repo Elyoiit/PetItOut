@@ -28,7 +28,7 @@ LOGIN_URL = 'PetItOut:login'
 SECRET_KEY = 't$*g*m^x9x$di2prhii!pop9g2&x_@m^=pbow5h3=pm1y*4bg5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', "elyoiit.pythonanywhere.com"]
 #Variable defines for media, for now

@@ -3,178 +3,161 @@
 
 
 {% block title_block %}
-Pet It Out!!
+- battles
 {% endblock %}
 
 {% block body_block %}
-
 <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
 
-    </head>
-
-    <body>
-        
-        <div class = "sidebar_and_battles">
-
-            <div class = "sidebar"></div>
-
-            <div class = "battle_shortform">
-                <div class = "pet_name_and_pic">
-                    <p class = "left_name">{{battle_view.petprofileBlue.pet_name}}</p>
-
-                    <div style = "text-align: center;">
-                        <a href = "{% url 'PetItOut:user_profile' battle_view.petprofileRed.userprofile.user.username%}">
-                        <img src="{{ battle_view.petprofileBlue.pet_picture.url }}" class = "pet_pic" alt="Profile pic of cat">
-                    </a>
-                    </div>
-                </div>      
-                <div class = "battle_info">
-                    <div class = "likes_texts"> 
-                            
-                    </div>
-                    <div class="pk-detail-con">
-                        <div class="progress" >
-                          <div id="progress-bar" style="width: 50%;">
-                          </div>
-                        </div>
-                        <span id="vnums-l" class="vote-nums">{{battle_view.petprofileBlue.likes.count}}</span>
-                        <span id="vnums-r" class="vote-nums">{{battle_view.petprofileRed.likes.count}}</span>
-
-                        <button class="vote-nums vnums-b" onclick="moveRed()">vote me!</button>
-                      <button class="vote-nums vnums-red" onclick="moveBlue()">vote me!</button>
-                    </div>
-                    <br>
-                    <br>
-                    
-                    <br>
+<div class="container">
 
 
-                </div>      
-                <div class = "pet_name_and_pic">
-                    <p class = "right_name">{{battle_view.petprofileRed.pet_name}}</p>
-
-                    <div style="text-align: center;">
-                        <a href = "{% url 'PetItOut:user_profile' battle_view.petprofileBlue.userprofile.user.username%}">
-                        <img src="{{ battle_view.petprofileRed.pet_picture.url }}" class = "pet_pic" alt="Profile pic of cat"></a>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="pk-detail-con">
+            <div class="progress" >
+              <div id="progress-bar" style="width: 50%;">
+              </div>
             </div>
-        </div>
-
-
-        
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <script>
-
-            var x = null;
-            $('.vnums-b').click(function(){
-                $.ajax({
-                    type:"POST",
-                    url:"{% url 'PetItOut:battle' battle_view.petprofileBlue.userprofile.user.username%}",
-                    data:{'content_id': $(this).attr('name'),'operation':'like_submit_blue','csrfmiddlewaretoken': '{{ csrf_token }}'},
-                    dataType:"json",
-                    success:function(){moveBlue()}
-                });
-        
-                    function moveBlue(){
-                        {
-                        if(x==null){
-                        var blueBar = document.getElementsByClassName("progress-bar");
-                        
-                        var parentWidth = $('.progress-bar').offsetParent().width();
-                        var width = $('.progress-bar').width();
-                        var i = Math.round(100*width/parentWidth);
-                            var write =  parseInt($("#vnums-l").text())+1;
-                            var writeString = write.toString();
-                                x=1;
-                            document.getElementById("vnums-l").innerHTML=writeString;      
-                            var oppo = parseInt($("#vnums-r").text());      
-                            var result = write/(write+oppo)*100;
-                            $("#progress-bar").css("width", result+"%");
-                            
-                        }
-                        else{
-                        alert("can only vote once!");
-                        }
-                    }
-                }
-            });
-                
-        $('.vnums-red').click(function(){
-            $.ajax({
-                    type:"POST",
-                    url:"{% url 'PetItOut:battle' battle_view.petprofileRed.userprofile.user.username%}",
-                    data:{'content_id': $(this).attr('name'),'operation':'like_submit_red','csrfmiddlewaretoken': '{{ csrf_token }}'},
-                    dataType:"json",
-                    success:
-                        function(){ moveRed()}
-                        });
-                    
-                    function moveRed(){
-                    if(x==null){
-                        var blueBar = document.getElementsByClassName("progress-bar");
-                        x=1;
-                        var parentWidth = $('.progress-bar').offsetParent().width();
-                        var width = $('.progress-bar').width();
-                        var i = Math.round(100*width/parentWidth);
-                            var write =  parseInt($("#vnums-r").text())+1;
-                            var writeString = write.toString();
-                        
-                            document.getElementById("vnums-r").innerHTML=writeString;      
-                            var oppo = parseInt($("#vnums-l").text());      
-                            var result = oppo/(write+oppo)*100;
-                            $("#progress-bar").css("width", result+"%");
-                        }
-                        else{
-                        alert("can only vote once!");
-                        }
-                        }
-                    });
-                    function moveRed(){
-                    if(x==null){
-                        var blueBar = document.getElementsByClassName("progress-bar");
-                        x=1;
-                        var parentWidth = $('.progress-bar').offsetParent().width();
-                        var width = $('.progress-bar').width();
-                        var i = Math.round(100*width/parentWidth);
-                            var write =  parseInt($("#vnums-r").text());
-                            var writeString = write.toString();
-                        
-                            document.getElementById("vnums-r").innerHTML=writeString;      
-                            var oppo = parseInt($("#vnums-l").text());      
-                            var result = oppo/(write+oppo)*100;
-                            $("#progress-bar").css("width", result+"%");
-                        }
-                        else{
-                        alert("can only vote once!");
-                        }
-                        }
-                    function moveBlue(){
-                        {
-                        if(x==null){
-                        var blueBar = document.getElementsByClassName("progress-bar");
-                        
-                        var parentWidth = $('.progress-bar').offsetParent().width();
-                        var width = $('.progress-bar').width();
-                        var i = Math.round(100*width/parentWidth);
-                            var write =  parseInt($("#vnums-l").text());
-                            var writeString = write.toString();
-                                x=1;
-                            document.getElementById("vnums-l").innerHTML=writeString;      
-                            var oppo = parseInt($("#vnums-r").text());      
-                            var result = write/(write+oppo)*100;
-                            $("#progress-bar").css("width", result+"%");
-                            
-                        }
-                        else{
-                        alert("can only vote once!");
-                        }
-                    }
-                }
-                
-                    
+            <span id="vnums-l" class="vote-nums">{{battle_view.petprofileBlue.likes.count}}</span>
+            <span id="vnums-r" class="vote-nums">{{battle_view.petprofileRed.likes.count}}</span>
     
-        </script>
+            <button class="vote-nums vnums-b" onclick="moveRed()">vote me!</button>
+          <button class="vote-nums vnums-red" onclick="moveBlue()">vote me!</button>
+        </div>
+      <div class="col-sm" style="padding-top: 20%;">
+        <div class="card">
+            <img src="{{ battle_view.petprofileBlue.pet_picture.url }}" class="card object-fit-cover" style="height: 400px;" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{battle_view.petprofileBlue.pet_name}}</h5>
+              <p class="card-text">{{battle_view.petprofileBlue.pet_type}}</p>
+              <p class="card-text">{{battle_view.petprofileBlue.pet_age}}</p>              
+              <p class="card-text">{{battle_view.petprofileBlue.pet_description}}</p>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm" style="padding-top: 20%;">
+        <div class="card">
+            <img src="{{ battle_view.petprofileRed.pet_picture.url }}" class="card-img-top object-fit-cover" style="height: 400px;" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{battle_view.petprofileRed.pet_name}}</h5>
+              <p class="card-text">{{battle_view.petprofileRed.pet_type}}</p>
+              <p class="card-text">{{battle_view.petprofileRed.pet_age}}</p>
+            </div>
+              <li class="list-group-item">{{battle_view.petprofileRed.pet_description}}</li>
+          </div>      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script>
+
+      var x = null;
+      $('.vnums-b').click(function(){
+          $.ajax({
+              type:"POST",
+              url:"{% url 'PetItOut:battle' battle_view.petprofileBlue.userprofile.user.username%}",
+              data:{'content_id': $(this).attr('name'),'operation':'like_submit_blue','csrfmiddlewaretoken': '{{ csrf_token }}'},
+              dataType:"json",
+              success:function(){moveBlue()}
+          });
+  
+              function moveBlue(){
+                  {
+                  if(x==null){
+                  var blueBar = document.getElementsByClassName("progress-bar");
+                  
+                  var parentWidth = $('.progress-bar').offsetParent().width();
+                  var width = $('.progress-bar').width();
+                  var i = Math.round(100*width/parentWidth);
+                      var write =  parseInt($("#vnums-l").text())+1;
+                      var writeString = write.toString();
+                          x=1;
+                      document.getElementById("vnums-l").innerHTML=writeString;      
+                      var oppo = parseInt($("#vnums-r").text());      
+                      var result = write/(write+oppo)*100;
+                      $("#progress-bar").css("width", result+"%");
+                      
+                  }
+                  else{
+                  alert("can only vote once!");
+                  }
+              }
+          }
+      });
+          
+  $('.vnums-red').click(function(){
+      $.ajax({
+              type:"POST",
+              url:"{% url 'PetItOut:battle' battle_view.petprofileRed.userprofile.user.username%}",
+              data:{'content_id': $(this).attr('name'),'operation':'like_submit_red','csrfmiddlewaretoken': '{{ csrf_token }}'},
+              dataType:"json",
+              success:
+                  function(){ moveRed()}
+                  });
+              
+              function moveRed(){
+              if(x==null){
+                  var blueBar = document.getElementsByClassName("progress-bar");
+                  x=1;
+                  var parentWidth = $('.progress-bar').offsetParent().width();
+                  var width = $('.progress-bar').width();
+                  var i = Math.round(100*width/parentWidth);
+                      var write =  parseInt($("#vnums-r").text())+1;
+                      var writeString = write.toString();
+                  
+                      document.getElementById("vnums-r").innerHTML=writeString;      
+                      var oppo = parseInt($("#vnums-l").text());      
+                      var result = oppo/(write+oppo)*100;
+                      $("#progress-bar").css("width", result+"%");
+                  }
+                  else{
+                  alert("can only vote once!");
+                  }
+                  }
+              });
+              function moveRed(){
+              if(x==null){
+                  var blueBar = document.getElementsByClassName("progress-bar");
+                  x=1;
+                  var parentWidth = $('.progress-bar').offsetParent().width();
+                  var width = $('.progress-bar').width();
+                  var i = Math.round(100*width/parentWidth);
+                      var write =  parseInt($("#vnums-r").text());
+                      var writeString = write.toString();
+                  
+                      document.getElementById("vnums-r").innerHTML=writeString;      
+                      var oppo = parseInt($("#vnums-l").text());      
+                      var result = oppo/(write+oppo)*100;
+                      $("#progress-bar").css("width", result+"%");
+                  }
+                  else{
+                  alert("can only vote once!");
+                  }
+                  }
+              function moveBlue(){
+                  {
+                  if(x==null){
+                  var blueBar = document.getElementsByClassName("progress-bar");
+                  
+                  var parentWidth = $('.progress-bar').offsetParent().width();
+                  var width = $('.progress-bar').width();
+                  var i = Math.round(100*width/parentWidth);
+                      var write =  parseInt($("#vnums-l").text());
+                      var writeString = write.toString();
+                          x=1;
+                      document.getElementById("vnums-l").innerHTML=writeString;      
+                      var oppo = parseInt($("#vnums-r").text());      
+                      var result = write/(write+oppo)*100;
+                      $("#progress-bar").css("width", result+"%");
+                      
+                  }
+                  else{
+                  alert("can only vote once!");
+                  }
+              }
+          }
+          
+              
+
+  </script>
 {% endblock %}
